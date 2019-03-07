@@ -59,9 +59,9 @@ var connection = mysql.createConnection({
 						console.log('Your total is $' + orderPrice);
 
 						// End the database connection
-						connection.end();
                     });
                 }
+                connection.end();
             });
         });
     });

@@ -10,10 +10,10 @@
 // to Inventory, your app should display a prompt that will let the manager "add more" of any 
 // item currently in the store. If a manager selects Add New Product, it should allow the 
 // manager to add a completely new product to the store.
-require("dotenv").config();
+
 var inquirer = require('inquirer');
 var mysql = require('mysql');
-var keys = require("./keys.js");
+
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -130,6 +130,7 @@ function addNewProduct() {
             } else {
                 console.log("Inventory successfully updated.")
             }
+            connection.end();
         });
     });
 }
@@ -152,6 +153,7 @@ function viewLowInventory() {
                 "\n"
             );
         });
+        connection.end();
     });
 }
 function viewProductsForSale() {
@@ -173,6 +175,7 @@ function viewProductsForSale() {
                 "\n"
             );
         });
+        connection.end();
     });
 }
 

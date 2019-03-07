@@ -28,4 +28,21 @@ VALUES  ('Presser Cooker', 'Home and Kitchen', 69.99, 500),
         ('Kitchen Aid Blender', 'Home and Kitchen', 199.99, 50), 
         ('Lamp', 'Home and Kitchen', 35.99, 10);
 
+CREATE TABLE departments (
+  department_id INTEGER NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR(25) NOT NULL,
+  over_head_costs DECIMAL(10, 2) NOT NULL
+  PRIMARY KEY (department_id)
+);
+
+ALTER TABLE products
+ADD product_sales DECIMAL(10.2);
+
+
+SELECT department_id, departments.department_name, over_head_costs, 
+SUM(product_sales) AS product_sales, 
+SUM(product_sales) - over_head_costs AS total_profit 
+FROM departments INNER JOIN products 
+ON departments.department_name = products.department_name
+GROUP BY department_id;
 

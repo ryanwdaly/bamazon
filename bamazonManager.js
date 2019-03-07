@@ -10,9 +10,10 @@
 // to Inventory, your app should display a prompt that will let the manager "add more" of any 
 // item currently in the store. If a manager selects Add New Product, it should allow the 
 // manager to add a completely new product to the store.
-
+require("dotenv").config();
 var inquirer = require('inquirer');
 var mysql = require('mysql');
+var keys = require("./keys.js");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -23,8 +24,6 @@ var connection = mysql.createConnection({
   });
 
   promptInput();
-
-
 //////////////////////////////////////////////////
 
 function promptInput() {
@@ -41,29 +40,24 @@ function promptInput() {
             // filter: Number
         }
     ]).then(function(input) {
-        
-        connection.connect(function(err) {  
-            if (err) throw err;
-            
-            switch(input.option) {
-                case "1":
-                    viewProductsForSale();
-                    break;
-                case "2":
-                    viewLowInventory();
-                    break;
-                case "3": 
-                    addMoreOf();
-                    break;
-                case "4":
-                    addNewProduct();
-                    break;
-                default: 
-                    console.log("Please enter valid input.");
-                    promptInput();
-                    break;   
-            }
-        });
+        switch(input.option) {
+            case "1":
+                viewProductsForSale();
+                break;
+            case "2":
+                viewLowInventory();
+                break;
+            case "3": 
+                addMoreOf();
+                break;
+            case "4":
+                addNewProduct();
+                break;
+            default: 
+                console.log("Please enter valid input.");
+                promptInput();
+                break;   
+        }
     });
 }
 function addMoreOf() {

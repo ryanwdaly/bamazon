@@ -40,9 +40,6 @@ var connection = mysql.createConnection({
                     throw err;
                 } else {
                     var data = result[0];
-                    var product_id = data.item_id;
-                    var product_name = data.product_name;
-                    var department_name = data.department_name;
                     var price = data.price;
                     var stock_quantity = data.stock_quantity;
                 }
@@ -51,14 +48,15 @@ var connection = mysql.createConnection({
                     console.log("Insufficient quantity. " + quantity_requested + " requested. " + result.stock_quantity + " available.");
                 } else {
                     console.log('Order Complete.');
-
-					var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (stock_quantity - quantity_requested) + ' WHERE item_id = ' + item_id;
+                    var orderPrice = price * quantity_requested;
+                    var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (stock_quantity - quantity_requested) + "," +
+                        ' product_sales = ' + orderPrice + ' WHERE item_id = ' + item_id;
 
 					// Update the inventory
 					connection.query(updateQueryStr, function(err, data) {
 						if (err) throw err;
 
-						console.log('Your total is $' + price * quantity_requested);
+						console.log('Your total is $' + orderPrice);
 
 						// End the database connection
 						connection.end();

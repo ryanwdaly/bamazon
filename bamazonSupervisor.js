@@ -1,12 +1,12 @@
-
+require('dotenv').config()
 var inquirer = require('inquirer');
 var mysql = require('mysql');
 var Table = require('easy-table')
 
 var connection = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "rootroot",
+    user: process.env.SQL_USER,
+    password: process.env.SQL_PASS,
     port: "3306",
     database: "Bamazon"
   });

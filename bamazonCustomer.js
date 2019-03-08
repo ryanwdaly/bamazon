@@ -10,12 +10,12 @@ var connection = mysql.createConnection({
     database: "Bamazon"
   });
 
-  promptInput();
+promptInput();
 
-  // Takes user input and returns a promise. User is prompted to provide a product ID and 
-  //    a desired quantity, the products table is updated if order can be fulfilled, otherwise
-  //    a message is logged regarding the issue 
-  function promptInput() {
+// Takes user input and returns a promise. User is prompted to provide a product ID and 
+//    a desired quantity, the products table is updated if order can be fulfilled, otherwise
+//    a message is logged regarding the issue 
+function promptInput() {
     inquirer.prompt([
         {
             type: 'input',

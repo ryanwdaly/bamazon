@@ -11,9 +11,9 @@ var connection = mysql.createConnection({
     database: "Bamazon"
   });
 
-  promptInput();
+promptInput();
 //////////////////////////////////////////////////////////////////////
-  function promptInput() {
+function promptInput() {
     inquirer.prompt([
         {
             type: 'input',

@@ -7,7 +7,7 @@
 require('dotenv').config()
 var inquirer = require('inquirer');
 var mysql = require('mysql');
-var Table = require('easy-table')
+var Table = require('easy-table');
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -17,7 +17,7 @@ var connection = mysql.createConnection({
     database: "Bamazon"
   });
 
-  promptInput();
+promptInput();
 //////////////////////////////////////////////////
 
 function promptInput() {
@@ -133,18 +133,17 @@ function viewLowInventory() {
         if (err) {
             throw err;
         } else {
-    
+            var table = new Table;
+            result.forEach(function(product) {
+                table.cell("Product ID", product.item_id)
+                table.cell("Product Name", product.product_name)
+                table.cell("Department Name", product.deparment_name)
+                table.cell("Price", product.price)
+                table.cell("Stock Quantity", product.stock_quantity)
+                table.newRow()
+            });
+            console.log(table.toString())
         }
-        result.forEach(function(e) {
-            console.log(
-                "Product ID: " + e.item_id, 
-                "\nProdcut Name: " + e.product_name, 
-                "\nDepartment Name: " + e.department_name,
-                "\nPrice: " + e.price,
-                "\nStock Quantity: " + e.stock_quantity,
-                "\n"
-            );
-        });
         connection.end();
     });
 }
@@ -155,18 +154,17 @@ function viewProductsForSale() {
         if (err) {
             throw err;
         } else {
-    
+            var table = new Table;
+            result.forEach(function(product) {
+                table.cell("Product ID", product.item_id)
+                table.cell("Product Name", product.product_name)
+                table.cell("Department Name", product.deparment_name)
+                table.cell("Price", product.price)
+                table.cell("Stock Quantity", product.stock_quantity)
+                table.newRow()
+            });
+            console.log(table.toString())
         }
-        result.forEach(function(e) {
-            console.log(
-                "Product ID: " + e.item_id, 
-                "\nProdcut Name: " + e.product_name, 
-                "\nDepartment Name: " + e.department_name,
-                "\nPrice: " + e.price,
-                "\nStock Quantity: " + e.stock_quantity,
-                "\n"
-            );
-        });
         connection.end();
     });
 }
